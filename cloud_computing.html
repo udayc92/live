@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Computing for Services</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f9f7f4;
+      color: #2d2d2d;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e8e3dc;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #c96442;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      color: #6b6560;
+      font-size: 1rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .intro {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      color: #444;
+      font-size: 0.97rem;
+    }
+
+    .intro strong {
+      color: #c96442;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+
+    .card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #6b6560;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge-iaas { background: #fef3ee; color: #c96442; }
+    .badge-paas { background: #eef5ff; color: #3b7dd8; }
+    .badge-saas { background: #eefaf3; color: #2e9e5b; }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .benefit {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    .benefit .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #c96442;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .benefit p {
+      font-size: 0.875rem;
+      color: #444;
+    }
+
+    .benefit p strong {
+      display: block;
+      color: #3d3530;
+      margin-bottom: 0.2rem;
+    }
+
+    .providers {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .provider {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 10px;
+      padding: 0.9rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3d3530;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .provider span { font-size: 1.2rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      font-size: 0.8rem;
+      border-top: 1px solid #e8e3dc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>☁️ Cloud Computing for Services</h1>
+  <p>Deliver, scale, and manage services anywhere — without managing hardware.</p>
+</header>
+
+<div class="container">
+
+  <div class="intro">
+    <strong>What is Cloud Computing?</strong> It's the delivery of computing resources — servers, storage, databases, networking, software — over the internet on demand. Instead of owning infrastructure, you rent exactly what you need, when you need it.
+  </div>
+
+  <!-- Service Models -->
+  <p class="section-title">Service Models</p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🏗️</div>
+      <span class="badge badge-iaas">IaaS</span>
+      <h3>Infrastructure as a Service</h3>
+      <p>Rent virtual machines, storage, and networking. You manage the OS and everything above it. Best for full control.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🛠️</div>
+      <span class="badge badge-paas">PaaS</span>
+      <h3>Platform as a Service</h3>
+      <p>Deploy apps without managing servers. The provider handles the runtime, OS, and scaling. Best for developers.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💼</div>
+      <span class="badge badge-saas">SaaS</span>
+      <h3>Software as a Service</h3>
+      <p>Ready-to-use apps delivered via browser. No install, no maintenance. Best for end users and businesses.</p>
+    </div>
+  </div>
+
+  <!-- Key Benefits -->
+  <p class="section-title">Key Benefits</p>
+  <div class="benefits-grid">
+    <div class="benefit">
+      <div class="dot"></div>
+      <p><strong>Scale Instantly</strong>Handle traffic spikes without pre-buying hardware.</p>
+    </div>
+    <div class="benefit">
+      <div class="dot"></div>
+      <p><strong>Pay-as-you-go</strong>Only pay for resources you actually consume.</p>
+    </div>
+    <div class="benefit">
+      <div class="dot"></div>
+      <p><strong>Global Reach</strong>Deploy services to data centers worldwide in minutes.</p>
+    </div>
+    <div class="benefit">
+      <div class="dot"></div>
+      <p><strong>High Availability</strong>Built-in redundancy keeps services running 24/7.</p>
+    </div>
+    <div class="benefit">
+      <div class="dot"></div>
+      <p><strong>Security</strong>Enterprise-grade encryption and compliance tools included.</p>
+    </div>
+    <div class="benefit">
+      <div class="dot"></div>
+      <p><strong>Speed to Market</strong>Provision resources in seconds, not days.</p>
+    </div>
+  </div>
+
+  <!-- Providers -->
+  <p class="section-title">Major Cloud Providers</p>
+  <div class="providers">
+    <div class="provider"><span>🟠</span> Amazon Web Services (AWS)</div>
+    <div class="provider"><span>🔵</span> Microsoft Azure</div>
+    <div class="provider"><span>🟡</span> Google Cloud Platform</div>
+    <div class="provider"><span>🌊</span> DigitalOcean</div>
+    <div class="provider"><span>☁️</span> IBM Cloud</div>
+  </div>
+
+</div>
+
+<footer>Cloud Computing Overview &nbsp;·&nbsp; Built with simplicity in mind</footer>
+
+</body>
+</html>
