@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Computing Quiz</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f9f7f4;
+      color: #2d2d2d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #c96442;
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      color: #6b6560;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-box {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Progress Bar */
+    .progress-bar-wrap {
+      background: #f0ece7;
+      border-radius: 99px;
+      height: 6px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: #c96442;
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* Timer */
+    .timer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .q-count {
+      font-size: 0.85rem;
+      color: #6b6560;
+      font-weight: 600;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #3d3530;
+      background: #fef3ee;
+      border: 1px solid #f5d9ce;
+      padding: 0.3rem 0.8rem;
+      border-radius: 99px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .timer.warning { background: #fff3cd; border-color: #ffc107; color: #856404; }
+    .timer.danger  { background: #fde8e8; border-color: #f44336; color: #c62828; }
+
+    /* Question */
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #3d3530;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* Options */
+    .options { display: flex; flex-direction: column; gap: 0.7rem; }
+
+    .option {
+      background: #f9f7f4;
+      border: 1.5px solid #e8e3dc;
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      cursor: pointer;
+      font-size: 0.92rem;
+      color: #3d3530;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .option:hover:not(.disabled) {
+      border-color: #c96442;
+      background: #fef3ee;
+    }
+
+    .option.selected { border-color: #c96442; background: #fef3ee; }
+    .option.correct  { border-color: #2e9e5b; background: #eefaf3; color: #1a6e3b; font-weight: 600; }
+    .option.wrong    { border-color: #e05252; background: #fde8e8; color: #9b2020; }
+    .option.disabled { cursor: default; }
+
+    .option .letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e8e3dc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      color: #6b6560;
+    }
+
+    .option.correct .letter  { background: #2e9e5b; color: #fff; }
+    .option.wrong .letter    { background: #e05252; color: #fff; }
+    .option.selected .letter { background: #c96442; color: #fff; }
+
+    /* Next Button */
+    .next-btn {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: #c96442;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+      transition: background 0.2s;
+    }
+
+    .next-btn:hover { background: #b5593a; }
+
+    /* Feedback */
+    .feedback {
+      margin-top: 1rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .feedback.correct-fb { background: #eefaf3; border: 1px solid #a3d9b8; color: #1a6e3b; }
+    .feedback.wrong-fb   { background: #fde8e8; border: 1px solid #f5b8b8; color: #9b2020; }
+
+    /* START SCREEN */
+    #start-screen {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    #start-screen .big-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+
+    #start-screen p {
+      color: #6b6560;
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .start-btn {
+      padding: 0.85rem 2.5rem;
+      background: #c96442;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .start-btn:hover { background: #b5593a; }
+
+    /* RESULT SCREEN */
+    #result-screen { display: none; }
+
+    .score-banner {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #fef3ee;
+      border: 4px solid #c96442;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .score-circle .score-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #c96442;
+      line-height: 1;
+    }
+
+    .score-circle .score-total {
+      font-size: 0.75rem;
+      color: #6b6560;
+    }
+
+    .score-banner h2 { font-size: 1.2rem; color: #3d3530; margin-bottom: 0.3rem; }
+    .score-banner p  { font-size: 0.88rem; color: #6b6560; }
+
+    /* Review */
+    .review-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e8e3dc;
+    }
+
+    .review-item {
+      margin-bottom: 1.2rem;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #e8e3dc;
+      background: #f9f7f4;
+    }
+
+    .review-item .ri-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .ri-badge {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+    }
+
+    .ri-badge.ok  { background: #eefaf3; color: #2e9e5b; }
+    .ri-badge.err { background: #fde8e8; color: #e05252; }
+
+    .ri-q {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #3d3530;
+    }
+
+    .ri-ans {
+      font-size: 0.82rem;
+      color: #6b6560;
+      margin-bottom: 0.4rem;
+    }
+
+    .ri-ans span { font-weight: 600; color: #3d3530; }
+
+    .ri-exp {
+      font-size: 0.82rem;
+      color: #444;
+      background: #fff;
+      border-left: 3px solid #c96442;
+      padding: 0.5rem 0.7rem;
+      border-radius: 0 6px 6px 0;
+      line-height: 1.5;
+    }
+
+    .restart-btn {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: #c96442;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .restart-btn:hover { background: #b5593a; }
+  </style>
+</head>
+<body>
+
+<h1>☁️ Cloud Computing Quiz</h1>
+<p class="subtitle">Test your knowledge on cloud services</p>
+
+<div class="quiz-box">
+
+  <!-- START SCREEN -->
+  <div id="start-screen">
+    <div class="big-icon">🎯</div>
+    <p>10 questions &nbsp;·&nbsp; 20 seconds per question<br>Answer before the timer runs out!</p>
+    <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen" style="display:none;">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="timer-row">
+      <span class="q-count" id="q-count">Question 1 of 10</span>
+      <div class="timer" id="timer">⏱ 20s</div>
+    </div>
+    <div class="question-text" id="question-text"></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next →</button>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="result-screen">
+    <div class="score-banner">
+      <div class="score-circle">
+        <div class="score-num" id="final-score">0</div>
+        <div class="score-total">/ 10</div>
+      </div>
+      <h2 id="result-title">Well done!</h2>
+      <p id="result-msg">Here's a breakdown of your answers.</p>
+    </div>
+    <div class="review-title">📋 Review & Explanations</div>
+    <div id="review-list"></div>
+    <button class="restart-btn" onclick="restartQuiz()">🔄 Retake Quiz</button>
+  </div>
+
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "What does IaaS stand for in cloud computing?",
+      options: ["Internet as a Service", "Infrastructure as a Service", "Integration as a Service", "Information as a Service"],
+      answer: 1,
+      explanation: "IaaS (Infrastructure as a Service) provides virtualized computing resources like servers, storage, and networking over the internet."
+    },
+    {
+      q: "Which of the following is an example of a SaaS product?",
+      options: ["Amazon EC2", "Google Kubernetes Engine", "Gmail", "Microsoft Azure VMs"],
+      answer: 2,
+      explanation: "Gmail is a SaaS (Software as a Service) product — it's a ready-to-use application delivered via the browser with no installation needed."
+    },
+    {
+      q: "What is the primary benefit of cloud computing's pay-as-you-go model?",
+      options: ["Faster internet speed", "No need for internet", "Reduced upfront hardware costs", "Unlimited free storage"],
+      answer: 2,
+      explanation: "Pay-as-you-go means you only pay for the resources you consume, eliminating large upfront capital expenditures on hardware."
+    },
+    {
+      q: "Which cloud deployment model is used exclusively by a single organization?",
+      options: ["Public Cloud", "Hybrid Cloud", "Community Cloud", "Private Cloud"],
+      answer: 3,
+      explanation: "A Private Cloud is dedicated to a single organization, offering greater control, security, and customization compared to public cloud."
+    },
+    {
+      q: "Amazon Web Services (AWS), Microsoft Azure, and Google Cloud are examples of:",
+      options: ["Private cloud providers", "On-premise solutions", "Public cloud providers", "SaaS applications"],
+      answer: 2,
+      explanation: "AWS, Azure, and GCP are the three largest public cloud providers, offering services to millions of users over the public internet."
+    },
+    {
+      q: "What is 'elasticity' in cloud computing?",
+      options: ["Data encryption capability", "The ability to scale resources up or down automatically", "Flexible pricing contracts", "Cross-region data transfer"],
+      answer: 1,
+      explanation: "Elasticity refers to the ability to automatically scale computing resources up during high demand and down when demand drops — a core cloud advantage."
+    },
+    {
+      q: "Which cloud service model gives developers a platform to build and deploy apps without managing servers?",
+      options: ["IaaS", "SaaS", "PaaS", "DaaS"],
+      answer: 2,
+      explanation: "PaaS (Platform as a Service) provides a managed environment for developers to build, test, and deploy applications without worrying about underlying infrastructure."
+    },
+    {
+      q: "What does 'multi-tenancy' mean in cloud computing?",
+      options: ["Multiple servers in one location", "Multiple users sharing the same infrastructure", "Running multiple operating systems", "Using multiple cloud providers"],
+      answer: 1,
+      explanation: "Multi-tenancy means multiple customers (tenants) share the same physical infrastructure while their data remains logically isolated and secure."
+    },
+    {
+      q: "Which of the following best describes a 'Hybrid Cloud'?",
+      options: ["Only uses private servers", "Combines public and private cloud environments", "A cloud only for small businesses", "A cloud with no internet connection"],
+      answer: 1,
+      explanation: "A Hybrid Cloud integrates private and public cloud environments, allowing data and applications to move between them for greater flexibility."
+    },
+    {
+      q: "What is the main purpose of a CDN (Content Delivery Network) in cloud services?",
+      options: ["To store encrypted passwords", "To manage user accounts", "To deliver content faster by using servers closer to users", "To run machine learning models"],
+      answer: 2,
+      explanation: "A CDN distributes content across geographically dispersed servers so users receive data from the nearest node, reducing latency and improving load times."
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let answered = false;
+  let timerInterval = null;
+  let timeLeft = 20;
+  let userAnswers = [];
+
+  function startQuiz() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    answered = false;
+    timeLeft = 20;
+    const q = questions[current];
+
+    document.getElementById('q-count').textContent = `Question ${current + 1} of ${questions.length}`;
+    document.getElementById('progress-fill').style.width = `${(current / questions.length) * 100}%`;
+    document.getElementById('question-text').textContent = q.q;
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'none';
+
+    const timer = document.getElementById('timer');
+    timer.className = 'timer';
+    timer.textContent = `⏱ ${timeLeft}s`;
+
+    // Render options
+    const optDiv = document.getElementById('options');
+    optDiv.innerHTML = '';
+    const letters = ['A','B','C','D'];
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.innerHTML = `<div class="letter">${letters[i]}</div><span>${opt}</span>`;
+      btn.onclick = () => selectAnswer(i);
+      optDiv.appendChild(btn);
+    });
+
+    // Start timer
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timer.textContent = `⏱ ${timeLeft}s`;
+      if (timeLeft <= 5) timer.className = 'timer danger';
+      else if (timeLeft <= 10) timer.className = 'timer warning';
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timeExpired();
+      }
+    }, 1000);
+  }
+
+  function selectAnswer(index) {
+    if (answered) return;
+    answered = true;
+    clearInterval(timerInterval);
+
+    const q = questions[current];
+    const options = document.querySelectorAll('.option');
+    const feedback = document.getElementById('feedback');
+
+    options.forEach(o => o.classList.add('disabled'));
+    options[index].classList.add('selected');
+    options[q.answer].classList.add('correct');
+
+    const isCorrect = index === q.answer;
+    if (!isCorrect) {
+      options[index].classList.remove('selected');
+      options[index].classList.add('wrong');
+    } else {
+      score++;
+    }
+
+    userAnswers.push({ chosen: index, correct: isCorrect });
+
+    feedback.className = `feedback ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
+    feedback.textContent = isCorrect ? '✅ Correct!' : `❌ Incorrect — the right answer is "${q.options[q.answer]}"`;
+    feedback.style.display = 'block';
+    document.getElementById('next-btn').style.display = 'block';
+  }
+
+  function timeExpired() {
+    if (answered) return;
+    answered = true;
+
+    const q = questions[current];
+    const options = document.querySelectorAll('.option');
+    options.forEach(o => o.classList.add('disabled'));
+    options[q.answer].classList.add('correct');
+    userAnswers.push({ chosen: -1, correct: false });
+
+    const feedback = document.getElementById('feedback');
+    feedback.className = 'feedback wrong-fb';
+    feedback.textContent = `⏰ Time's up! The correct answer was "${q.options[q.answer]}"`;
+    feedback.style.display = 'block';
+    document.getElementById('next-btn').style.display = 'block';
+  }
+
+  function nextQuestion() {
+    current++;
+    if (current < questions.length) {
+      document.getElementById('progress-fill').style.width = `${(current / questions.length) * 100}%`;
+      loadQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    document.getElementById('final-score').textContent = score;
+    document.getElementById('progress-fill').style.width = '100%';
+
+    // Title & message
+    let title, msg;
+    if (score === 10)      { title = '🏆 Perfect Score!'; msg = 'Outstanding! You nailed every question.'; }
+    else if (score >= 8)   { title = '🌟 Excellent!'; msg = 'Great job! You clearly know your cloud.'; }
+    else if (score >= 6)   { title = '👍 Good Work!'; msg = 'Solid effort! A little more study and you\'ll ace it.'; }
+    else if (score >= 4)   { title = '📚 Keep Learning'; msg = 'Not bad, but there\'s room to grow. Review below!'; }
+    else                   { title = '💡 Keep Practicing'; msg = 'Cloud computing takes time to master. Review and retry!'; }
+
+    document.getElementById('result-title').textContent = title;
+    document.getElementById('result-msg').textContent = msg;
+
+    // Review
+    const reviewList = document.getElementById('review-list');
+    reviewList.innerHTML = '';
+    questions.forEach((q, i) => {
+      const ua = userAnswers[i];
+      const isOk = ua && ua.correct;
+      const userPicked = (ua && ua.chosen >= 0) ? q.options[ua.chosen] : 'No answer (timed out)';
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `
+        <div class="ri-header">
+          <span class="ri-badge ${isOk ? 'ok' : 'err'}">${isOk ? '✓ Correct' : '✗ Wrong'}</span>
+          <div class="ri-q">Q${i + 1}. ${q.q}</div>
+        </div>
+        <div class="ri-ans">Your answer: <span>${userPicked}</span></div>
+        ${!isOk ? `<div class="ri-ans">Correct answer: <span style="color:#2e9e5b">${q.options[q.answer]}</span></div>` : ''}
+        <div class="ri-exp">💡 ${q.explanation}</div>
+      `;
+      reviewList.appendChild(div);
+    });
+  }
+
+  function restartQuiz() {
+    current = 0; score = 0; answered = false; userAnswers = [];
+    clearInterval(timerInterval);
+    document.getElementById('result-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    document.getElementById('progress-fill').style.width = '0%';
+    loadQuestion();
+  }
+</script>
+
+</body>
+</html>
