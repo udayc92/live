@@ -9,41 +9,65 @@
 
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #f9f7f4;
-      color: #2d2d2d;
-      line-height: 1.6;
       min-height: 100vh;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #f0f0f0;
+      line-height: 1.6;
     }
 
     header {
-      background: #fff;
-      border-bottom: 1px solid #e8e3dc;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
       padding: 1.2rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     header .org {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #c96442;
-      letter-spacing: 0.3px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #a78bfa;
+      letter-spacing: 0.5px;
     }
 
     nav a {
       text-decoration: none;
-      color: #6b6560;
+      color: rgba(255,255,255,0.65);
       font-size: 0.9rem;
       margin-left: 1.5rem;
       transition: color 0.2s;
     }
 
-    nav a:hover { color: #c96442; }
+    nav a:hover { color: #a78bfa; }
+
+    /* Animated background blobs */
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .blob1 { width: 500px; height: 500px; background: #7c3aed; top: -100px; left: -100px; animation: float 8s ease-in-out infinite; }
+    .blob2 { width: 400px; height: 400px; background: #2563eb; bottom: -80px; right: -80px; animation: float 10s ease-in-out infinite reverse; }
+    .blob3 { width: 300px; height: 300px; background: #db2777; top: 40%; left: 40%; animation: float 12s ease-in-out infinite 2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
 
     .hero {
+      position: relative;
+      z-index: 1;
       max-width: 860px;
-      margin: 3.5rem auto;
+      margin: 4rem auto;
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
@@ -52,6 +76,21 @@
 
     .photo-wrap {
       flex-shrink: 0;
+      position: relative;
+    }
+
+    .photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa, #f472b6);
+      z-index: -1;
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     .photo-wrap img {
@@ -59,34 +98,34 @@
       height: 180px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #e8e3dc;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      border: 4px solid #0f0c29;
+      display: block;
     }
 
     .bio h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #3d3530;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
       letter-spacing: -0.5px;
     }
 
     .bio .role {
       font-size: 1.05rem;
-      color: #c96442;
+      color: #a78bfa;
       font-weight: 600;
       margin-top: 0.3rem;
     }
 
     .bio .institution {
-      font-size: 0.95rem;
-      color: #6b6560;
-      margin-top: 0.2rem;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.25rem;
     }
 
     .bio .about {
       margin-top: 1.2rem;
       font-size: 0.93rem;
-      color: #555;
+      color: rgba(255,255,255,0.70);
       max-width: 500px;
     }
 
@@ -96,7 +135,7 @@
 
     .cta a {
       display: inline-block;
-      padding: 0.55rem 1.3rem;
+      padding: 0.6rem 1.4rem;
       border-radius: 8px;
       font-size: 0.9rem;
       font-weight: 600;
@@ -104,35 +143,38 @@
       transition: all 0.2s;
     }
 
-    .cta .btn-primary {
-      background: #c96442;
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
       color: #fff;
       margin-right: 0.75rem;
+      box-shadow: 0 4px 15px rgba(124,58,237,0.4);
     }
 
-    .cta .btn-primary:hover { background: #b05535; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,0.5); }
 
-    .cta .btn-secondary {
-      background: #fff;
-      color: #3d3530;
-      border: 1px solid #e8e3dc;
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
-    .cta .btn-secondary:hover { border-color: #c96442; color: #c96442; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.15); }
 
     .section {
+      position: relative;
+      z-index: 1;
       max-width: 860px;
       margin: 0 auto 3rem;
       padding: 0 1.5rem;
     }
 
     .section-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #3d3530;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       margin-bottom: 1.2rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #e8e3dc;
     }
 
     .interests {
@@ -142,33 +184,43 @@
     }
 
     .tag {
-      background: #fef3ee;
-      color: #c96442;
-      border: 1px solid #f5d5c8;
+      background: rgba(167,139,250,0.12);
+      color: #a78bfa;
+      border: 1px solid rgba(167,139,250,0.3);
       border-radius: 99px;
-      padding: 0.3rem 0.85rem;
+      padding: 0.35rem 1rem;
       font-size: 0.83rem;
       font-weight: 600;
+      transition: background 0.2s;
     }
 
+    .tag:hover { background: rgba(167,139,250,0.25); }
+
     footer {
+      position: relative;
+      z-index: 1;
       text-align: center;
       padding: 2rem;
-      color: #aaa;
+      color: rgba(255,255,255,0.3);
       font-size: 0.8rem;
-      border-top: 1px solid #e8e3dc;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     @media (max-width: 620px) {
-      .hero { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .hero { flex-direction: column; gap: 2rem; text-align: center; }
       .bio .about { max-width: 100%; }
     }
   </style>
 </head>
 <body>
 
+<!-- Background blobs -->
+<div class="bg-blob blob1"></div>
+<div class="bg-blob blob2"></div>
+<div class="bg-blob blob3"></div>
+
 <header>
-  <span class="org">ANITS Engineering College</span>
+  <span class="org">ANITS</span>
   <nav>
     <a href="index.html">Home</a>
     <a href="courses.html">Courses</a>
@@ -182,15 +234,15 @@
   <div class="bio">
     <h1>Pilla Uday</h1>
     <div class="role">Assistant Professor</div>
-    <div class="institution">Department of Computer Science &amp; Engineering<br>ANITS Engineering College</div>
+    <div class="institution">Department of Data Science &nbsp;·&nbsp; ANITS</div>
     <p class="about">
-      Passionate about teaching and research in Computer Science.
+      Passionate about teaching and research in Data Science.
       Focused on cloud computing, distributed systems, and emerging technologies.
       Committed to equipping students with practical skills for real-world challenges.
     </p>
     <div class="cta">
       <a href="courses.html" class="btn-primary">View Courses</a>
-      <a href="mailto:sampathiraopilla-uday@gmail.com" class="btn-secondary">Contact</a>
+      <a href="mailto:sampathiraoyoganandh@gmail.com" class="btn-secondary">Contact</a>
     </div>
   </div>
 </div>
@@ -198,15 +250,15 @@
 <div class="section">
   <p class="section-title">Research Interests</p>
   <div class="interests">
+    <span class="tag">Data Science</span>
     <span class="tag">Cloud Computing</span>
-    <span class="tag">Distributed Systems</span>
     <span class="tag">Machine Learning</span>
+    <span class="tag">Distributed Systems</span>
     <span class="tag">Network Security</span>
-    <span class="tag">Data Engineering</span>
   </div>
 </div>
 
-<footer>© 2026 Pilla Uday &nbsp;·&nbsp; ANITS Engineering College</footer>
+<footer>© 2026 Pilla Uday &nbsp;·&nbsp; ANITS</footer>
 
 </body>
 </html>
