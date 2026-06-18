@@ -1,6 +1,212 @@
-<html>
-    <h1>This is my first static page.</h1>
-    <p>uday</p>
-    <a href="/cloud_computing.html" >Cloud Computing</a>
-   <a href="/cloud_quiz.html">quiz</a> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pilla Uday – Assistant Professor</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f9f7f4;
+      color: #2d2d2d;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e8e3dc;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .org {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #c96442;
+      letter-spacing: 0.3px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #6b6560;
+      font-size: 0.9rem;
+      margin-left: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #c96442; }
+
+    .hero {
+      max-width: 860px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .photo-wrap {
+      flex-shrink: 0;
+    }
+
+    .photo-wrap img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #e8e3dc;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    }
+
+    .bio h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3d3530;
+      letter-spacing: -0.5px;
+    }
+
+    .bio .role {
+      font-size: 1.05rem;
+      color: #c96442;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .bio .institution {
+      font-size: 0.95rem;
+      color: #6b6560;
+      margin-top: 0.2rem;
+    }
+
+    .bio .about {
+      margin-top: 1.2rem;
+      font-size: 0.93rem;
+      color: #555;
+      max-width: 500px;
+    }
+
+    .cta {
+      margin-top: 1.6rem;
+    }
+
+    .cta a {
+      display: inline-block;
+      padding: 0.55rem 1.3rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta .btn-primary {
+      background: #c96442;
+      color: #fff;
+      margin-right: 0.75rem;
+    }
+
+    .cta .btn-primary:hover { background: #b05535; }
+
+    .cta .btn-secondary {
+      background: #fff;
+      color: #3d3530;
+      border: 1px solid #e8e3dc;
+    }
+
+    .cta .btn-secondary:hover { border-color: #c96442; color: #c96442; }
+
+    .section {
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e8e3dc;
+    }
+
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      background: #fef3ee;
+      color: #c96442;
+      border: 1px solid #f5d5c8;
+      border-radius: 99px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      font-size: 0.8rem;
+      border-top: 1px solid #e8e3dc;
+    }
+
+    @media (max-width: 620px) {
+      .hero { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .bio .about { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="org">ANITS Engineering College</span>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="courses.html">Courses</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="photo-wrap">
+    <img src="photo.jpg" alt="Pilla Uday" />
+  </div>
+  <div class="bio">
+    <h1>Pilla Uday</h1>
+    <div class="role">Assistant Professor</div>
+    <div class="institution">Department of Computer Science &amp; Engineering<br>ANITS Engineering College</div>
+    <p class="about">
+      Passionate about teaching and research in Computer Science.
+      Focused on cloud computing, distributed systems, and emerging technologies.
+      Committed to equipping students with practical skills for real-world challenges.
+    </p>
+    <div class="cta">
+      <a href="courses.html" class="btn-primary">View Courses</a>
+      <a href="mailto:sampathiraopilla-uday@gmail.com" class="btn-secondary">Contact</a>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-title">Research Interests</p>
+  <div class="interests">
+    <span class="tag">Cloud Computing</span>
+    <span class="tag">Distributed Systems</span>
+    <span class="tag">Machine Learning</span>
+    <span class="tag">Network Security</span>
+    <span class="tag">Data Engineering</span>
+  </div>
+</div>
+
+<footer>© 2026 Pilla Uday &nbsp;·&nbsp; ANITS Engineering College</footer>
+
+</body>
 </html>

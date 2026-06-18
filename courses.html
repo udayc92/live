@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses – Pilla Uday</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f9f7f4;
+      color: #2d2d2d;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e8e3dc;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .org {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #c96442;
+      letter-spacing: 0.3px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #6b6560;
+      font-size: 0.9rem;
+      margin-left: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #c96442; }
+
+    .container {
+      max-width: 860px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-subtitle {
+      color: #6b6560;
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .course-card {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 14px;
+      padding: 1.6rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .course-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      border-color: #c96442;
+    }
+
+    .course-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: #fef3ee;
+      color: #c96442;
+      border-radius: 99px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .course-card h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 0.4rem;
+    }
+
+    .course-card p {
+      font-size: 0.875rem;
+      color: #6b6560;
+      margin-bottom: 1.2rem;
+    }
+
+    .course-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #c96442;
+    }
+
+    .course-link::after {
+      content: ' →';
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      font-size: 0.8rem;
+      border-top: 1px solid #e8e3dc;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="org">ANITS Engineering College</span>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="courses.html">Courses</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1 class="page-title">Courses</h1>
+  <p class="page-subtitle">Courses offered by Pilla Uday – Assistant Professor, ANITS Engineering College</p>
+
+  <div class="courses-grid">
+
+    <a href="cloud_computing.html" class="course-card">
+      <div class="course-icon">☁️</div>
+      <span class="course-badge">CS / IT</span>
+      <h2>Cloud Computing for Services</h2>
+      <p>Explore IaaS, PaaS, and SaaS models, key cloud benefits, and major providers like AWS, Azure, and GCP.</p>
+      <span class="course-link">View Course</span>
+    </a>
+
+    <a href="cloud_quiz.html" class="course-card">
+      <div class="course-icon">📝</div>
+      <span class="course-badge">Assessment</span>
+      <h2>Cloud Computing Quiz</h2>
+      <p>Test your knowledge of cloud concepts with an interactive quiz covering core topics from the course.</p>
+      <span class="course-link">Take Quiz</span>
+    </a>
+
+  </div>
+</div>
+
+<footer>© 2026 Pilla Uday &nbsp;·&nbsp; ANITS Engineering College</footer>
+
+</body>
+</html>
