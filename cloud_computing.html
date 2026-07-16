@@ -169,6 +169,75 @@
 
     .provider span { font-size: 1.2rem; }
 
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .material-card {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 12px;
+      padding: 1.3rem 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .material-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      border-color: #c96442;
+    }
+
+    .material-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #fef3ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .material-info .unit-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #c96442;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.2rem;
+    }
+
+    .material-info h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #3d3530;
+      margin-bottom: 0.3rem;
+    }
+
+    .material-info p {
+      font-size: 0.82rem;
+      color: #6b6560;
+      margin-bottom: 0.4rem;
+    }
+
+    .material-download {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #c96442;
+    }
+
+    .material-download::after {
+      content: ' ↓ Download';
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -241,6 +310,72 @@
       <div class="dot"></div>
       <p><strong>Speed to Market</strong>Provision resources in seconds, not days.</p>
     </div>
+  </div>
+
+  <!-- Course Materials -->
+  <p class="section-title">Course Materials — Unit Slide Decks</p>
+  <div class="materials-grid">
+
+    <a href="materials/Cloud_Computing_Preview.pptx" class="material-card">
+      <div class="material-icon">📘</div>
+      <div class="material-info">
+        <div class="unit-label">Overview</div>
+        <h3>Course Preview</h3>
+        <p>Complete unit-wise roadmap — Fundamentals → Architecture → Service Models → Virtualization → Security</p>
+        <span class="material-download"></span>
+      </div>
+    </a>
+
+    <a href="materials/Cloud_Computing_Fundamentals_-_1.pptx" class="material-card">
+      <div class="material-icon">🌱</div>
+      <div class="material-info">
+        <div class="unit-label">Unit I</div>
+        <h3>Cloud Computing Fundamentals</h3>
+        <p>Motivation, definitions, principles, service and platform views, and deployment models</p>
+        <span class="material-download"></span>
+      </div>
+    </a>
+
+    <a href="materials/Cloud_Architecture_and_Infrastructure_-_2.pptx" class="material-card">
+      <div class="material-icon">🏛️</div>
+      <div class="material-info">
+        <div class="unit-label">Unit II</div>
+        <h3>Cloud Architecture &amp; Infrastructure</h3>
+        <p>Architecture layers, anatomy, network connectivity, managing the cloud, and migrating applications</p>
+        <span class="material-download"></span>
+      </div>
+    </a>
+
+    <a href="materials/Cloud_Service_Models_-_3.pptx" class="material-card">
+      <div class="material-icon">🧩</div>
+      <div class="material-info">
+        <div class="unit-label">Unit III</div>
+        <h3>Cloud Service Models</h3>
+        <p>IaaS, PaaS, and SaaS — characteristics, suitability, pros and cons, providers, and other XaaS models</p>
+        <span class="material-download"></span>
+      </div>
+    </a>
+
+    <a href="materials/Virtualization_in_Cloud_-_4.pptx" class="material-card">
+      <div class="material-icon">🖥️</div>
+      <div class="material-info">
+        <div class="unit-label">Unit IV</div>
+        <h3>Virtualization in the Cloud</h3>
+        <p>Opportunities, types, virtual machines, hypervisors, architecture, and building cloud applications</p>
+        <span class="material-download"></span>
+      </div>
+    </a>
+
+    <a href="materials/Cloud_Security_and_Applications_-_5.pptx" class="material-card">
+      <div class="material-icon">🔒</div>
+      <div class="material-info">
+        <div class="unit-label">Unit V</div>
+        <h3>Cloud Security &amp; Applications</h3>
+        <p>Security issues, data protection, identity &amp; access, cloud storage, backup &amp; recovery, and case studies</p>
+        <span class="material-download"></span>
+      </div>
+    </a>
+
   </div>
 
   <!-- Providers -->
